@@ -1,0 +1,16 @@
+{
+  "description": "A collection of simple data structures for TypeScript",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MattLaidman/TypeScript/DataStructures.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha -r ts-node/register ./src/test/DataStructuresTest.ts"
+  },
+  "devDependencies": {
+    "typescript": "^2.3.4",
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2"
+  }
+}
