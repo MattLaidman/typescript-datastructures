@@ -1,4 +1,4 @@
-import { LinkedList } from "./LinkedList";
+import { LinkedList } from './LinkedList';
 
 /**
  * implementation of a generic Stack data structure
@@ -23,13 +23,8 @@ import { LinkedList } from "./LinkedList";
  */
 export class EmptyStackError extends Error {
 
-    /**
-     * calls Error with message
-     * @constructor
-     */
-    constructor() {
-        super("Stack is empty");
-    }
+    public name = 'EmptyStackError';
+    public message = 'Stack is empty';
 
 }
 

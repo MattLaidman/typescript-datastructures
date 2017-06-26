@@ -1,4 +1,4 @@
-import { LinkedList } from "./LinkedList";
+import { LinkedList } from './LinkedList';
 
 /**
  * implementation of a generic Set data structure
@@ -29,13 +29,8 @@ import { LinkedList } from "./LinkedList";
  */
 export class ItemInSetError extends Error {
 
-    /**
-     * calls Error with message
-     * @constructor
-     */
-    constructor() {
-        super("item exists in Set");
-    }
+    public name = 'ItemInSetError';
+    public message = 'item exists in Set';
 
 }
 
@@ -47,14 +42,9 @@ export class ItemInSetError extends Error {
  */
 export class ItemNotInSetError extends Error {
 
-    /**
-     * calls Error with message
-     * @constructor
-     */
-    constructor() {
-        super("item does not exist in Set");
-    }
-
+    public name = 'ItemNotInSetError';
+    public message = 'item does not exist in Set';
+    
 }
 
 
@@ -65,7 +55,6 @@ export class ItemNotInSetError extends Error {
 export class Set<T> {
 
     private items: LinkedList<T>;
-    private size = 0;
 
     /**
      * initializes the Set
@@ -86,7 +75,7 @@ export class Set<T> {
      * @returns {number} the number of items in the Set
      */
     public getSize(): number {
-        return this.size;
+        return this.items.getSize();
     }
 
     /**
@@ -94,7 +83,7 @@ export class Set<T> {
      * @returns {boolean} true if the Set is empty
      */
     public isEmpty(): boolean {
-        return this.size == 0;
+        return this.items.getSize() == 0;
     }
 
     /**
@@ -163,12 +152,22 @@ export class Set<T> {
      * @returns {Set<T>} a new Set which is the intersection of the current Set and the passed Set
      */
     public intersection(aSet: Set<T>): Set<T> {
-        let newSet = new Set<T>(this);
+        let newSet = new Set<T>();
         let size = aSet.getSize();
-        for (let i = 0 ; i < size ; i++) {
-            let item = aSet.items.getItemAt(i);
-            if (this.containsItem(item)) {
-                newSet.addItem(item);
+        if (size > this.getSize()) {
+            for (let i = 0 ; i < size ; i++) {
+                let item = aSet.items.getItemAt(i);
+                if (this.containsItem(item)) {
+                    newSet.addItem(item);
+                }
+            }
+        } else {
+            size = this.getSize();
+            for (let i = 0 ; i < size ; i++) {
+                let item = this.items.getItemAt(i);
+                if (aSet.containsItem(item)) {
+                    newSet.addItem(item);
+                }
             }
         }
         return newSet;
@@ -181,7 +180,7 @@ export class Set<T> {
      */
     public equals(aSet: Set<T>): boolean {
         let size = aSet.getSize();
-        if (size !== this.size) {
+        if (size !== this.items.getSize()) {
             return false;
         }
         for (let i = 0 ; i < size ; i++) {
@@ -200,7 +199,7 @@ export class Set<T> {
      */
     public difference(aSet: Set<T>): Set<T> {
         let newSet = new Set<T>();
-        let size = this.size;
+        let size = this.items.getSize();
         for (let i = 0 ; i < size ; i++) {
             let item = this.items.getItemAt(i);
             if (!aSet.containsItem(item)) {
@@ -217,13 +216,15 @@ export class Set<T> {
      */
     public isSubsetOf(aSet: Set<T>): boolean {
         let size = aSet.getSize();
-        if (size < this.size) {
+        if (size < this.getSize()) {
             return false;
-        }
-        for (let i = 0 ; i < size ; i++) {
-            let item = this.items.getItemAt(i);
-            if (!aSet.items.containsItem(item)) {
-                return false;
+        } else {
+            let size = this.getSize();
+            for (let i = 0 ; i < size ; i++) {
+                let item = this.items.getItemAt(i);
+                if (!aSet.items.containsItem(item)) {
+                    return false;
+                }
             }
         }
         return true;
@@ -236,7 +237,7 @@ export class Set<T> {
      */
     public isProperSubsetOf(aSet: Set<T>): boolean {
         let size = aSet.getSize();
-        if (size <= this.size) {
+        if (size <= this.getSize()) {
             return false;
         }
         return this.isSubsetOf(aSet);

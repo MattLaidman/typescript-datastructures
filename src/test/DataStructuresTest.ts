@@ -1,4 +1,4 @@
-import "./LinkedListTest";
-import "./StackTest";
-import "./QueueTest";
-import "./SetTest";
+import './LinkedListTest';
+import './StackTest';
+import './QueueTest';
+import './SetTest';

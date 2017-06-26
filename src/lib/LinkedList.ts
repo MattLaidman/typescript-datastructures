@@ -30,16 +30,9 @@
  */
 export class OutOfBoundsError extends Error {
 
-    /**
-     * calls Error with message
-     * @constructor
-     */
-    constructor() {
-        super("index out of bounds");
-    }
-
+    public name = 'OutOfBoundsError';
+    public message = 'index out of bounds';
 }
-
 
 /**
  * error class for empty LinkedList
@@ -48,13 +41,8 @@ export class OutOfBoundsError extends Error {
  */
 export class EmptyListError extends Error {
 
-    /**
-     * calls Error with message
-     * @constructor
-     */
-    constructor() {
-        super("LinkedList is empty");
-    }
+    public name = 'EmptyListError';
+    public message = 'LinkedList is empty';
 
 }
 
@@ -66,13 +54,8 @@ export class EmptyListError extends Error {
  */
 export class ItemNotFoundError extends Error {
 
-    /**
-     * calls Error with message
-     * @constructor
-     */
-    constructor() {
-        super("item not found");
-    }
+    public name = 'ItemNotFoundError';
+    public message = 'item not found';
 
 }
 
@@ -347,6 +330,7 @@ export class LinkedList<T> {
 
     /**
      * gets the index of an item if it exists in the LinkedList
+     * will return the first index that the item is found at
      * @param {T} item - the item to get the index of
      * @throws {ItemNotFoundError} when the item is not found in the LinkedList
      */

@@ -1,4 +1,4 @@
-import { LinkedList } from "./LinkedList";
+import { LinkedList } from './LinkedList';
 
 /**
  * implementation of a generic Queue data structure
@@ -23,14 +23,9 @@ import { LinkedList } from "./LinkedList";
  */
 export class EmptyQueueError extends Error {
 
-    /**
-     * calls Error with message
-     * @constructor
-     */
-    constructor() {
-        super("Queue is empty");
-    }
-
+    public name = 'EmptyQueueError';
+    public message = 'Queue is empty';
+    
 }
 
 
